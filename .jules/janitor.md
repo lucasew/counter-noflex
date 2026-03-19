@@ -1,0 +1,1 @@
+- 2025-03-19: Format files and use modern block-scoping (let/const) instead of var.
