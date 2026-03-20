@@ -1,44 +1,57 @@
 <html xmlns="http://www.w3.org/1999/xhtml" class="top-left">
-<head>
+  <head>
     <title>Counter</title>
-    <meta charset="UTF-8">
-</head>
-<body class="top-left">
+    <meta charset="UTF-8" />
+  </head>
+  <body class="top-left">
     <style>
-        .top-left {
-            position: relative;
-            top: 0;
-            left: 0;
-        }
-        body, html {
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-        }
-        body {
-            display: table;
-        }
-        .container {
-            vertical-align: middle;
-            text-align: center;
-            display: table-cell;
-        }
+      .top-left {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+      body,
+      html {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      body {
+        display: table;
+      }
+      .container {
+        vertical-align: middle;
+        text-align: center;
+        display: table-cell;
+      }
     </style>
     <div class="container top-left">
-        <h1 id="counter">0</h1>
+      <h1 id="counter">0</h1>
     </div>
     <script>
-        var i = 0;
-        function incr() {
-            document.getElementById("counter").innerText = String(i);
-            i++;
-            setTimeout(incr, 1000);
+      function reportError(error) {
+        // Centralized error reporting
+        console.error("Reported Error:", error);
+      }
+
+      const UPDATE_INTERVAL_MS = 1000;
+      let counterValue = 0;
+
+      function updateCounter() {
+        try {
+          document.getElementById("counter").innerText = String(counterValue);
+          counterValue++;
+          setTimeout(updateCounter, UPDATE_INTERVAL_MS);
+        } catch (error) {
+          reportError(error);
         }
-        incr()
+      }
+
+      updateCounter();
     </script>
-</body>
+  </body>
 </html>
