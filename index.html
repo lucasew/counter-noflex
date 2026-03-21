@@ -32,13 +32,40 @@
         <h1 id="counter">0</h1>
     </div>
     <script>
-        var i = 0;
-        function incr() {
-            document.getElementById("counter").innerText = String(i);
-            i++;
-            setTimeout(incr, 1000);
+        function reportError(error) {
+            console.error("Reported Error:", error);
+            // Centralized error reporting
         }
-        incr()
+
+        const COUNTER_INTERVAL_MS = 1000;
+
+        class Counter {
+            constructor(elementId) {
+                this.elementId = elementId;
+                this.value = 0;
+            }
+
+            increment() {
+                try {
+                    const element = document.getElementById(this.elementId);
+                    if (!element) {
+                        throw new Error(`Element with id '${this.elementId}' not found`);
+                    }
+                    element.innerText = String(this.value);
+                    this.value++;
+                    setTimeout(() => this.increment(), COUNTER_INTERVAL_MS);
+                } catch (error) {
+                    reportError(error);
+                }
+            }
+        }
+
+        try {
+            const counter = new Counter("counter");
+            counter.increment();
+        } catch (error) {
+            reportError(error);
+        }
     </script>
 </body>
 </html>
