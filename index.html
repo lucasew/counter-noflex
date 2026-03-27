@@ -32,7 +32,18 @@
         <h1 id="counter">0</h1>
     </div>
     <script>
+        /**
+         * Global counter state indicating the number of elapsed seconds.
+         * @type {number}
+         */
         var i = 0;
+
+        /**
+         * Updates the counter DOM element with the current state,
+         * increments the state, and schedules the next update via the event loop.
+         *
+         * @sideeffects Mutates the DOM element with id "counter".
+         */
         function incr() {
             document.getElementById("counter").innerText = String(i);
             i++;
